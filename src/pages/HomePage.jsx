@@ -1,5 +1,6 @@
 import React from 'react';
 import Banner from '../components/banner';
+import PetGallery from '../components/PetGallery';
 import WhyChooseUs from '../components/WhyChooseUs'; // Nuevo componente
 import ProductCard from '../components/ProductCard';
 import Testimonials from '../components/Testimonials';
@@ -20,11 +21,12 @@ function HomePage() {
   return (
   <main className="home-page">
     <Banner />
+    <PetGallery />
     <WhyChooseUs />
     <section className="featured-products" id="productos">
         <h3>Productos Destacados</h3>
         <div className="product-list">
-          {products.slice(0, 3).map(product => ( // .slice(0, 3) muestra solo los 3 primeros productos
+          {products.slice(0, 4).map(product => ( // .slice(0, 3) muestra solo los 3 primeros productos
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
@@ -32,10 +34,10 @@ function HomePage() {
           <a href="/productos" className="view-all-button">Ver todos los productos</a>
         </div>
     </section>
+    <MissionVision />
     <Testimonials />
     <BlogPosts />
     <Brands />
-    <MissionVision />
   </main>
 );
 }
