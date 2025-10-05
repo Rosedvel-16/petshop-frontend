@@ -3,15 +3,19 @@ import ProductCard from '../components/ProductCard';
 
 function ProductsPage() {
   const [cart, setCart] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('all');
 
-  // Lista de todos los productos (puedes añadir más)
+  // Lista de todos los productos 
   const products = [
-    { id: 1, name: 'Comida para perro premium', description:"Alimento de alta calidad para un pelaje brillante y digestión saludable", price: 25.99, image: 'https://www.superpet.pe/on/demandware.static/-/Sites-SuperPet-master-catalog/default/dwe1b94d22/images/canbo-dog-food-cachorros-sb-pollo-rz-pq-x-1-kg.jpg' },
-    { id: 2, name: 'Juguete para gato',description:'Que tu gato no se aburra! Adquiere este producto', price: 9.50, image: 'https://www.lacuracao.pe/media/catalog/product/j/u/jugmas8787_01.jpg?quality=80&bg-color=255,255,255&fit=bounds&height=700&width=700&canvas=700:700' },
-    { id: 3, name: 'Collar ajustable',description: 'Lleva contigo el collar ajustable para que tu mascota siempre este segura y comoda', price: 15.00, image: 'https://img.kwcdn.com/product/fancy/e336978d-d92a-4ab7-805c-cd2f4497c249.jpg?imageMogr2/auto-orient%7CimageView2/2/w/800/q/70/format/webp' },
-    { id: 4, name: 'Bebedero automático', description: 'Fuente de agua silenciosa y con filtro para mantener a tu mascota hidratada.', price: 35.00, image: 'https://rimage.ripley.com.pe/home.ripley/Attachment/MKP/1223/PMP20000316654/full_image-1.jpeg' },
-    { id: 5, name: 'Cepillo especial para baños', description: 'Cuida el pelaje de tu mascota con este cepillo especial.', price: 8.00, image:'https://buypal.com.pe/wp-content/uploads/2024/09/QUITA-PELUSAS-VAPOR-800x800.jpg.webp'},
+    { id: 1, name: 'Comida para perro premium', category: 'perro', description:"Alimento de alta calidad para un pelaje brillante y digestión saludable", price: 25.99, image: 'https://www.superpet.pe/on/demandware.static/-/Sites-SuperPet-master-catalog/default/dwe1b94d22/images/canbo-dog-food-cachorros-sb-pollo-rz-pq-x-1-kg.jpg' },
+    { id: 2, name: 'Juguete para gato', category: 'gato',description:'Que tu gato no se aburra! Adquiere este producto', price: 9.50, image: 'https://www.lacuracao.pe/media/catalog/product/j/u/jugmas8787_01.jpg?quality=80&bg-color=255,255,255&fit=bounds&height=700&width=700&canvas=700:700' },
+    { id: 3, name: 'Collar ajustable', category: 'accesorios',description: 'Lleva contigo el collar ajustable para que tu mascota siempre este segura y comoda', price: 15.00, image: 'https://img.kwcdn.com/product/fancy/e336978d-d92a-4ab7-805c-cd2f4497c249.jpg?imageMogr2/auto-orient%7CimageView2/2/w/800/q/70/format/webp' },
+    { id: 4, name: 'Bebedero automático', category: 'accesorios', description: 'Fuente de agua silenciosa y con filtro para mantener a tu mascota hidratada.', price: 35.00, image: 'https://rimage.ripley.com.pe/home.ripley/Attachment/MKP/1223/PMP20000316654/full_image-1.jpeg' },
+    { id: 5, name: 'Cepillo especial para gatos', category: 'gato', description: 'Cuida el pelaje de tu mascota con este cepillo especial.', price: 8.00, image:'https://buypal.com.pe/wp-content/uploads/2024/09/QUITA-PELUSAS-VAPOR-800x800.jpg.webp'},
 ];
+  const filteredProducts = selectedCategory === 'all'
+    ? products
+    : products.filter(product => product.category === selectedCategory);
 
   const addToCart = (product) => {
     setCart((prevCart) => {
@@ -26,7 +30,7 @@ function ProductsPage() {
       return [...prevCart, { ...product, quantity: 1 }];
     });
   };
-  
+
   const clearCart = () => {
     setCart([]);
   };
@@ -36,18 +40,16 @@ function ProductsPage() {
       alert("El carrito está vacío. Agrega productos para hacer tu pedido.");
       return;
     }
-    
+
     // Generar el mensaje con la lista de productos
-    const cartItems = cart.map(item => 
+    const cartItems = cart.map(item =>
       `${item.quantity} x ${item.name} ($${(item.price * item.quantity).toFixed(2)})`
     ).join('\n');
-    
+
     const totalPrice = cart.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2);
-    
+
     const message = `Hola, me gustaría hacer un pedido:\n\n${cartItems}\n\nTotal: $${totalPrice}\n\n¡Gracias!`;
-    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
-    
-    // Abrir el enlace en una nueva ventana
+    const whatsappUrl = `https://wa.me/+51976908412/?text=${encodeURIComponent(message)}`; // Aquí va tu número de teléfono
     window.open(whatsappUrl, '_blank');
   };
 
@@ -58,7 +60,33 @@ function ProductsPage() {
       </div>
       <div className="products-container container">
         <div className="product-list-grid">
-          {products.map(product => (
+          <div className="categories-menu">
+            <button
+              onClick={() => setSelectedCategory('all')}
+              className={selectedCategory === 'all' ? 'active' : ''}
+            >
+              Todos
+            </button>
+            <button
+              onClick={() => setSelectedCategory('perro')}
+              className={selectedCategory === 'perro' ? 'active' : ''}
+            >
+              Perros
+            </button>
+            <button
+              onClick={() => setSelectedCategory('gato')}
+              className={selectedCategory === 'gato' ? 'active' : ''}
+            >
+              Gatos
+            </button>
+            <button
+              onClick={() => setSelectedCategory('accesorios')}
+              className={selectedCategory === 'accesorios' ? 'active' : ''}
+            >
+              Accesorios
+            </button>
+          </div>
+          {filteredProducts.map(product => (
             <ProductCard key={product.id} product={product} addToCart={addToCart} />
           ))}
         </div>

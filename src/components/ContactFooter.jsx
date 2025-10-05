@@ -22,7 +22,7 @@ function ContactFooter() {
   const dogImage = 'https://static.vecteezy.com/system/resources/previews/058/701/587/non_2x/cute-dog-puppy-free-png.png'; // Deja el enlace de la imagen aquí
 
   return (
-    <footer className="contact-footer-section">
+    <footer className="contact-footer-section" id="contacto">
       <div className="container contact-footer-grid">
         <div className="dog-image-container">
           <img src={dogImage} alt="Un perro amigable" className="dog-image" />
