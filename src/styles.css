@@ -750,3 +750,64 @@ p {
     position: static;
   }
 }
+
+
+/*------------------------------------------- Estilos de la Página de Adopción ------------------------------------*/
+.adoption-intro {
+  text-align: center;
+  padding: 1rem 2rem;
+}
+
+.adoption-intro h3 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.adoption-intro p {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.adoption-steps {
+  text-align: center;
+  padding: 1rem;
+}
+
+.adoption-steps h3 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.steps-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.step-card {
+  max-width: 240px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 2rem 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.step-card:hover {
+  transform: translateY(-10px);
+}
+
+.step-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.step-card h4 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.5rem;
+  color: #012454;
+}
